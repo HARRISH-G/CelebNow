@@ -3,13 +3,14 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const access_key = process.env.access_key;
+const access_key = "Harrish";
 
 
 async function authToken(req, res, next)
 {
     const authHeader = req.get('Authorization');
     const token = authHeader && authHeader.split(' ')[1];
+    console.log(token)
     
     if(token == null)
     {
@@ -22,19 +23,20 @@ async function authToken(req, res, next)
             return res.status(403).json({code: 'failed', message: 'Invalid Token', data:{}}); 
         }
         userData = user;
+        console.log(user)
     });
-
-    if(!userData.id)
+    console.log(userData)
+    if(!userData.phone)
     {
         return res.status(200).json({code: 'failed', message: 'Invalid Token', data:{}});
     }
 
-    let rec = await mongoose.model('User').findOne({'email' : userData.email, 'deleted' : false});
+    let rec = await mongoose.model('User').findOne({'phone' : userData.phone, 'deleted' : false});
 
     if(rec)
     {
         req.user = rec;
-        req.user.is_admin = false;
+        req.user.is_creator = false;
         next();
     }
     else

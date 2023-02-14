@@ -1,6 +1,7 @@
 var axios = require('axios');
 
-const sms = async(otp,number) => {
+module.exports.sms = async(number, message) => {
+  try{
     var data = JSON.stringify({
         "route": "q",
         "message": message,
@@ -20,8 +21,8 @@ const sms = async(otp,number) => {
         data : data
       };
     let res = await axios(config);
-    return JSON.stringify(response.data)
+    return JSON.stringify(res.data.return)
+  }catch(e){
+    return e
+  }
 }
-
-
-module.exports = sms;
