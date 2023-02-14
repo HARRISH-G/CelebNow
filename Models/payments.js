@@ -5,20 +5,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const paymentSchema = new Schema({
-  user:String,
-  creator:String,
+  requestId : { type:String , unique: true },
+  inputRecieptId : { type:String , unique: true },
+  outputRecieptId : { type:String , unique: true },
   service:{type:String , enum: ["dm","recordedVideo"]},
-  request : {
-    occasion:String,
-    from: String,
-    to:String,
-    message:{
-        type:String,
-        maxlength: 500,
-        minlength:1,
-    }
-  },
-  requestStatus:{type:String , enum: ["Pending", "Approved" , "Rejected" , "Completed"]},
+  payInputValue:{type:Number , default:0},
+  payOutputValue:{type:Number , default:0},
+  paymentInitiation:{type:String , enum: ["Recieved" , "Failed"]},
+  paymentStatus:{type:String , enum: ["Paid" ,"Refunded","Due"]},
   proofOfExistence:String,
   created: { type: Date, default: Date.now() },
   __v:0
