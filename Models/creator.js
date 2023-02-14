@@ -6,9 +6,9 @@ const Schema = mongoose.Schema;
 
 const creatorSchema = new Schema({
   name: String,
-  phone: String,
+  phone: { type:String , unique: true },
   password:String,
-  username:String,
+  username:{ type:String , unique: true },
   bio : String,
   profileImg :String,
   tags:[String],
@@ -51,6 +51,7 @@ const creatorSchema = new Schema({
     default:0
     },
   getUpdates :{type:String ,  enum: ["sms","whatsapp","both"] } ,
+  deleted : { type: Boolean , default : false},
   created: { type: Date, default: Date.now() },
   __v:0
 

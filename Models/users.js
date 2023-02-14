@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name: String,
-  phone: String,
+  phone: { type:String , unique: true },
   password:String,
   verified:{type:Boolean , default : false},
   getUpdates :{type:String ,  enum: ["sms","whatsapp","both"] } ,
