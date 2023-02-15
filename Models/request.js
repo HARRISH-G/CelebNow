@@ -21,7 +21,6 @@ const requestSchema = new Schema({
   },
   requestStatus:{type:String , enum: ["Pending", "Approved" , "Rejected" , "Completed"]},
   proofOfExistence:String,
-  transactionId:{ type:String , unique: true },
   created: { type: Date, default: Date.now() },
   __v:0
 });
