@@ -5,6 +5,7 @@ var cors = require('cors')
 const bodyParser = require('body-parser');
 
 const user = require("./Routes/user")
+const creator = require("./Routes/creator")
 
 
 // To parse URL encoded data
@@ -27,6 +28,7 @@ app.get('/', function (req, res) {
 })
 
 app.use("/users",user)
+app.use("/creator",creator)
 
 var server = app.listen(3000,() => {
    var host = server.address().address
